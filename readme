@@ -1,0 +1,71 @@
+Microsoft Windows [Version 10.0.26100.6725]
+(c) Microsoft Corporation. All rights reserved.
+
+C:\Users\Dell>mkdir C:\Users\Dell\student-portal
+A subdirectory or file C:\Users\Dell\student-portal already exists.
+
+C:\Users\Dell>cd C:\Users\Dell\student-portal
+
+C:\Users\Dell\student-portal>echo "" > index.html
+
+C:\Users\Dell\student-portal>echo "" > app.js
+
+C:\Users\Dell\student-portal>echo "" > style.css
+
+C:\Users\Dell\student-portal>git init
+Reinitialized existing Git repository in C:/Users/Dell/student-portal/.git/
+
+C:\Users\Dell\student-portal>git add index.html app.js style.css
+
+C:\Users\Dell\student-portal>git commit -m "Initial commit"
+On branch master
+nothing to commit, working tree clean
+
+C:\Users\Dell\student-portal>git checkout -b feature-login
+fatal: a branch named 'feature-login' already exists
+
+C:\Users\Dell\student-portal>git add app.js
+
+C:\Users\Dell\student-portal>git commit -m "Added login feature in app.js"
+On branch master
+nothing to commit, working tree clean
+
+C:\Users\Dell\student-portal>git branch
+  feature-login
+* master
+
+C:\Users\Dell\student-portal>git add style.css
+
+C:\Users\Dell\student-portal>git commit -m "Updated background color in style.css"
+On branch master
+nothing to commit, working tree clean
+
+C:\Users\Dell\student-portal>git merge feature-login
+Already up to date.
+
+C:\Users\Dell\student-portal>git add .
+nothing to commit, working tree clean
+
+C:\Users\Dell\student-portal>git branch
+  feature-login
+* master
+
+C:\Users\Dell\student-portal>git add style.css
+
+C:\Users\Dell\student-portal>git commit -m "Updated background color in style.css"
+On branch master
+nothing to commit, working tree clean
+
+C:\Users\Dell\student-portal>git merge feature-login
+Already up to date.
+
+C:\Users\Dell\student-portal>git add .
+
+C:\Users\Dell\student-portal>git commit -m "Resolved merge conflict"
+On branch master
+nothing to commit, working tree clean
+
+C:\Users\Dell\student-portal>git tag
+v1.0
+
+C:\Users\Dell\student-portal>
