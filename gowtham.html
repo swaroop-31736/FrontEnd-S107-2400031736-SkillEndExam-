@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Student Marks Table</title>
+  <style>
+    body { font-family: Arial, sans-serif; margin: 20px; }
+    table { border-collapse: collapse; width: 100%; margin-top: 20px; }
+    th, td { border: 1px solid #ccc; padding: 8px; text-align: center; }
+    th { cursor: pointer; background-color: #f2f2f2; }
+    input, select { margin-right: 10px; padding: 5px; }
+  </style>
+</head>
+<body>
+
+  <h2>Student Marks Table</h2>
+
+  <label for="subjectFilter">Filter by Subject:</label>
+  <select id="subjectFilter">
+    <option value="">All</option>
+    <option value="Math">Math</option>
+    <option value="Science">Science</option>
+    <option value="English">English</option>
+  </select>
+
+  <label for="minScore">Min Score:</label>
+  <input type="number" id="minScore" placeholder="0" min="0" max="100">
+
+  <label for="maxScore">Max Score:</label>
+  <input type="number" id="maxScore" placeholder="100" min="0" max="100">
+
+  <button onclick="applyFilters()">Apply Filters</button>
+
+  <table id="marksTable">
+    <thead>
+      <tr>
+        <th onclick="sortTable(0)">Student Name</th>
+        <th onclick="sortTable(1)">Subject</th>
+        <th onclick="sortTable(2)">Score</th>
+      </tr>
+    </thead>
+    <tbody id="tableBody">
+      <tr><td>John</td><td>Math</td><td>85</td></tr>
+      <tr><td>Mary</td><td>Science</td><td>92</td></tr>
+      <tr><td>Sam</td><td>English</td><td>78</td></tr>
+      <tr><td>Lisa</td><td>Math</td><td>95</td></tr>
+      <tr><td>Tom</td><td>Science</td><td>88</td></tr>
+      <tr><td>Amy</td><td>English</td><td>81</td></tr>
+    </tbody>
+  </table>
+
+  <script>
+    let sortDirection = [true, true, true]; // Ascending for each column initially
+
+    function sortTable(colIndex) {
+      const table = document.getElementById("marksTable");
+      const rows = Array.from(table.tBodies[0].rows);
+      const ascending = sortDirection[colIndex];
+
+      rows.sort((a, b) => {
+        let aVal = a.cells[colIndex].innerText;
+        let bVal = b.cells[colIndex].innerText;
+        if(colIndex === 2) { // score column numeric sort
+          aVal = parseInt(aVal);
+          bVal = parseInt(bVal);
+        }
+        return ascending ? (aVal > bVal ? 1 : -1) : (aVal < bVal ? 1 : -1);
+      });
+
+      rows.forEach(row => table.tBodies[0].appendChild(row));
+      sortDirection[colIndex] = !ascending;
+    }
+
+    function applyFilters() {
+      const subject = document.getElementById("subjectFilter").value;
+      const minScore = document.getElementById("minScore").value;
+      const maxScore = document.getElementById("maxScore").value;
+
+      const table = document.getElementById("marksTable");
+      const rows = table.tBodies[0].rows;
+
+      for(let row of rows) {
+        const rowSubject = row.cells[1].innerText;
+        const rowScore = parseInt(row.cells[2].innerText);
+        let show = true;
+
+        if(subject && rowSubject !== subject) show = false;
+        if(minScore && rowScore < parseInt(minScore)) show = false;
+        if(maxScore && rowScore > parseInt(maxScore)) show = false;
+
+        row.style.display = show ? "" : "none";
+      }
+    }
+  </script>
+
+</body>
+</html>
